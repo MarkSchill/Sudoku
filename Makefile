@@ -2,12 +2,15 @@ CC=gcc
 SRC=$(wildcard *.c)
 OBJ=$(patsubst %.c,%.o,$(SRC))
 CFLAGS=-Wall -std=c99 $(shell pkg-config --cflags ncursesw)
-LDFLAGS=
+LDFLAGS=$(shell pkg-config --libs ncurses)
 
 default: clean sudoku
 
-sudoku:
-	$(CC) $(SRC) -o $@ $(CFLAGS) $(shell pkg-config --libs ncursesw) -lncursesw
+%.o: %.c
+	$(CC) -c $^ $(CFLAGS)
+
+sudoku: $(OBJ)
+	$(CC) $^ -o $@ $(CFLAGS) $(LDFLAGS)
 
 clean:
 	rm -f $(OBJ) sudoku
