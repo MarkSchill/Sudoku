@@ -30,25 +30,31 @@ void menu_input(int *menu_running, int *y, int *x, int *my, int *mx) {
 }
 
 void menu_draw(int *y, int *x, int *my, int *mx) {
-	// Make sure to move the cursor to the starting point of the menu again
-	wmove(stdscr, 0, 0);
+	int width = 30;
+	int height = 7;
+	int box_x = (*mx / 2) - (width / 2);
+	int box_y = (*my / 2) - (height / 2);
 
-	WINDOW *middle = newwin(10, 10, 0, 0);
+	WINDOW *middle = newwin(height, width, box_y, box_x);
 	box(middle, 0, 0);
 
-	/*
+	WINDOW *circles = newwin(5, 8, box_y + 1, box_x + 18);
+	box(circles, 0, 0);
+
 	int i;
 	for (i = 0; i < n_items; i++) {
-		printw("%d. %s\n", i + 1, items[i]);
+		mvwprintw(middle, i + 1, 1, "%d. %s", i + 1, items[i]);
 	}
-	*/
-
+	
+	//TODO: Maybe move this to overlay.c
 	mvprintw(*my - 1, *mx - 10, "(%d, %d)", *y, *x);
 
-	refresh();
 	wrefresh(middle);
+	wrefresh(circles);
 
-	wmove(stdscr, *y, *x);
+	wmove(middle, *y + 1, *x + 1);
+
+	refresh();
 }
 
 void menu_loop(int *my, int *mx) {

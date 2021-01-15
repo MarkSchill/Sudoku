@@ -5,4 +5,6 @@ void game_draw();
 void game_input(int *, int *, int *, int *, int *);
 void game_loop(int *, int *);
 
+// void game_serialize();
+
 #endif
