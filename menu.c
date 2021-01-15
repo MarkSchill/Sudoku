@@ -33,15 +33,22 @@ void menu_draw(int *y, int *x, int *my, int *mx) {
 	// Make sure to move the cursor to the starting point of the menu again
 	wmove(stdscr, 0, 0);
 
+	WINDOW *middle = newwin(10, 10, 0, 0);
+	box(middle, 0, 0);
+
+	/*
 	int i;
 	for (i = 0; i < n_items; i++) {
 		printw("%d. %s\n", i + 1, items[i]);
 	}
+	*/
 
 	mvprintw(*my - 1, *mx - 10, "(%d, %d)", *y, *x);
 
-	wmove(stdscr, *y, *x);
 	refresh();
+	wrefresh(middle);
+
+	wmove(stdscr, *y, *x);
 }
 
 void menu_loop(int *my, int *mx) {
