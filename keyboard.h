@@ -1,8 +1,8 @@
 #ifndef	SUDOKU_KEYBOARD_H
 #define SUDOKU_KEYBOARD_H
 
-int directional_keys(int, int *, int *, int *, int *);
-int escape_keys(int);
-int enter_keys(int);
+int is_directional_keys(int);
+int is_escape_keys(int);
+int is_enter_keys(int);
 
 #endif

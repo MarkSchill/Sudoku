@@ -7,7 +7,7 @@ LDFLAGS=
 default: clean sudoku
 
 sudoku:
-	$(CC) menu.c keyboard.c game.c sudoku.c -o $@ $(CFLAGS) $(shell pkg-config --libs ncursesw) -lncursesw
+	$(CC) $(SRC) -o $@ $(CFLAGS) $(shell pkg-config --libs ncursesw) -lncursesw
 
 clean:
 	rm -f $(OBJ) sudoku
