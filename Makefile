@@ -4,10 +4,10 @@ OBJ=$(patsubst %.c,%.o,$(SRC))
 CFLAGS=-Wall -std=c99 $(shell pkg-config --cflags ncursesw)
 LDFLAGS=$(shell pkg-config --libs ncurses)
 
-default: clean sudoku
+default: sudoku
 
 %.o: %.c
-	$(CC) -c $^ $(CFLAGS)
+	$(CC) -c $< $(CFLAGS) -o $@
 
 sudoku: $(OBJ)
 	$(CC) $^ -o $@ $(CFLAGS) $(LDFLAGS)
