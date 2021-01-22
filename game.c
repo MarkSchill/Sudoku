@@ -3,12 +3,34 @@
 #include <ncurses.h>
 #include "keyboard.h"
 
-void game_draw() {
-	
+void game_draw(int *my, int *mx, int *y, int *x) {
+	int width = (9 * 2) - 2;
+	int height = (9 * 2) - 2;
+	int grid_x = (*mx / 2) - (width / 2);
+	int grid_y = (*my / 2) - (height / 2);
+
+	WINDOW *grid = newwin(height, width, grid_y, grid_x);
+	box(grid, 0, 0);
+
+	refresh();
+
+	wrefresh(grid);
+
+	move(*y, *x);
 }
 
 void game_input(int *game_running, int *y, int *x, int *my, int *mx) {
 	int key = getch();
+
+	if (key == KEY_UP) {
+		(*y) --;
+	} else if (key == KEY_DOWN) {
+		(*y) ++;
+	} else if (key == KEY_LEFT) {
+		(*x) --;
+	} else if (key == KEY_RIGHT) {
+		(*x) ++;
+	}
 
 	if (is_escape_keys(key)) {
 		*game_running = 0;
@@ -24,6 +46,7 @@ void game_loop(int *my, int *mx) {
 	clear();
 
 	while (running) {
-		game_input(&running, &y, &x, my, mx);
+		game_draw(my, mx, &y, &x);
+		game_input(&running, &y, &x, NULL, NULL);
 	}
 }
