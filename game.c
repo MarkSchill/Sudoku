@@ -32,6 +32,10 @@ void game_input(int *game_running, int *y, int *x, int *my, int *mx) {
 		(*x) ++;
 	}
 
+	if (key >= '0' && key <= '9') {
+		// Enter the given number into the current cell based on x & y
+	}
+
 	if (is_escape_keys(key)) {
 		*game_running = 0;
 	}
@@ -44,6 +48,12 @@ void game_loop(int *my, int *mx) {
 	y = x = 0;
 
 	clear();
+
+	// Set the cursor to 'very visible'
+	curs_set(2);
+
+	// Set blocking on read
+	timeout(0);
 
 	while (running) {
 		game_draw(my, mx, &y, &x);
