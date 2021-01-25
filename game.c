@@ -1,7 +1,6 @@
 #include "game.h"
 
 #include <ncurses.h>
-#include "keyboard.h"
 
 void game_draw(int *my, int *mx, int *y, int *x) {
 	int width = (9 * 2) - 2;
@@ -36,7 +35,7 @@ void game_input(int *game_running, int *y, int *x, int *my, int *mx) {
 		// Enter the given number into the current cell based on x & y
 	}
 
-	if (is_escape_keys(key)) {
+	if (key == (int) 'q') {
 		*game_running = 0;
 	}
 }

@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <memory.h>
 #include <time.h>
-#include "keyboard.h"
 #include "game.h"
 
 int n_items = 3;
@@ -24,7 +23,7 @@ void menu_input(int *menu_running, int *y, int *x, int *my, int *mx) {
 			(*y) ++;
 	}
 
-	if (is_enter_keys(key)) {
+	if (key == (int) '\n') {
 		if (*y == 0) {
 			// Start the game loop
 			game_loop(my, mx);
@@ -43,7 +42,7 @@ void menu_input(int *menu_running, int *y, int *x, int *my, int *mx) {
 		}
 	}
 	
-	if (is_escape_keys(key)) {
+	if (key == (int) 'q') {
 		*menu_running = 0;
 	} 
 }
